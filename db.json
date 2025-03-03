@@ -1,0 +1,59 @@
+[
+    {
+        "username": "anshul",
+        "password": "anshul123",
+        "email": "anshulmaurya27@gmail.com",
+        "phone": "1234567890",
+        "address": {
+                "name": "anshul",
+                "last_name": "maurya",
+                "sex": "male",
+                "complete_address": "xx yy zz aa bb cc",
+                "pincode": "123456",
+                "maps": "xxxxx.maps.google.com"
+        },
+        "pickup_time": {
+            "date": "2021-09-01",
+            "time": "10:00:00"
+        },
+        "material": {
+            "type": "plastic",
+            "weight": "100",
+            "unit": "kg",
+            "quantity": "na"
+        },
+        "pay_range": {
+            "min": "100",
+            "max": "200"
+        }
+    },
+
+    {
+        "username": "mamta",
+        "password": "mamta123",
+        "email": "mamta@gmail.com",
+        "phone": "1234567890",
+        "address": {
+                "name": "mamta",
+                "last_name": "singh",
+                "sex": "female",
+                "complete_address": "90 77 44 aa bb cc",
+                "pincode": "123456",
+                "maps": "zzz.maps.google.com"
+            },
+        "pickup_time": {
+            "date": "2022-09-01",
+            "time": "12:00"
+        },
+        "material": {
+            "type": "clothes",
+            "weight": "na",
+            "unit": "na",
+            "quantity": "10"
+        },
+        "pay_range": {
+            "min": "100",
+            "max": "200"
+        }
+    }
+]
