@@ -34,22 +34,22 @@ class MongoManager:
         except Exception as e:
             print(e)
 
-# Usage
-if __name__ == "__main__":
-    db_password = "recyclewala4Password"
-    db_name = "recyclya"
-    collection_name = "users"
+# # Usage
+# if __name__ == "__main__":
+#     db_password = "0o31l4nD7w5Iz3iy"
+#     db_name = "recyclya"
+#     collection_name = "users"
     
-    mongo_manager = MongoManager(db_password, db_name)
-    mongo_manager.connect()
+#     mongo_manager = MongoManager(db_password, db_name)
+#     mongo_manager.connect()
     
-    # Read data from JSON file
-    with open('/Users/anshulmaurya/Desktop/Projects/recyclya/aws-backend/db.json', 'r') as file:
-        data = json.load(file)
+#     # Read data from JSON file
+#     with open('/Users/anshulmaurya/Desktop/Projects/recyclya/aws-backend/db.json', 'r') as file:
+#         data = json.load(file)
     
-    # Write data to MongoDB
-    mongo_manager.write_to_db(collection_name, data)
+#     # Write data to MongoDB
+#     mongo_manager.write_to_db(collection_name, data)
     
-    # Read data from MongoDB
-    users = mongo_manager.read_from_db(collection_name)
-    print(users)
+#     # Read data from MongoDB
+#     users = mongo_manager.read_from_db(collection_name)
+#     print(users)
