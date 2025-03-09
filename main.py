@@ -1,4 +1,4 @@
-from uvicornBackend import app
+from uvicornBackend import *
 
 if __name__ == "__main__":
     import uvicorn

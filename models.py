@@ -3,4 +3,9 @@ from pydantic import BaseModel
 class User(BaseModel):
     username: str
     password: str
-    # ...other fields...
+
+
+class UserSignup(BaseModel):
+    username: str
+    password: str
+    email: str
