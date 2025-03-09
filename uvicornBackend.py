@@ -51,11 +51,15 @@ def delete_users(username: str):
 
 
 @app.post("/update_user")
-def update_user(username: str, update_data: dict):
+def update_user(username: str, update_data: dict, token: str = Depends(oauth2_scheme)):
     """
     Endpoint to update a user in the MongoDB collection.
     Usage: Send a POST request to /update_user with a JSON body containing user details.
     """
+    token_username = decode_access_token(token)
+    if token_username is None or token_username != username:
+        raise HTTPException(status_code=401, detail="Invalid token or unauthorized")
+    
     result = mongo_manager.update_user_in_db(collection_name, username, update_data)
     if result == 0:
         raise HTTPException(status_code=404, detail="User not found")
@@ -86,5 +90,26 @@ def read_users_me(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401, detail="Invalid token")
     user = mongo_manager.find_one(collection_name, {"username": username})
     return user
+
+
+@app.post("/forgot_password")
+def forgot_password(username: str, current_password: str, new_password: str):
+    """
+    Endpoint to reset a user's password.
+    Usage: Send a POST request to /forgot_password with a JSON body containing username, current password, and new password.
+    """
+    user = mongo_manager.find_one(collection_name, {"username": username})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if not verify_password(current_password, user["password"]):
+        raise HTTPException(status_code=401, detail="Incorrect current password")
+    
+    hashed_password = get_password_hash(new_password)
+    result = mongo_manager.update_user_in_db(collection_name, username, {"password": hashed_password})
+    if result == 0:
+        raise HTTPException(status_code=500, detail="Failed to update password")
+    
+    return {"message": "Password updated successfully!"}, 200
 
 
