@@ -34,6 +34,33 @@ class MongoManager:
         except Exception as e:
             print(e)
 
+    def delete_user_from_db(self, collection_name, username):
+        """
+        Delete a specific user from the MongoDB collection.
+        """
+        db = self.client[self.db_name]
+        collection = db[collection_name]
+        result = collection.delete_one({"username": username})
+        return result.deleted_count
+
+    def update_user_in_db(self, collection_name, username, update_data):
+        """
+        Update a specific user in the MongoDB collection.
+        """
+        db = self.client[self.db_name]
+        collection = db[collection_name]
+        result = collection.update_one({"username": username}, {"$set": update_data})
+        return result.modified_count
+
+    def find_one(self, collection_name, query):
+        """
+        Find a single document in the MongoDB collection that matches the query.
+        """
+        db = self.client[self.db_name]
+        collection = db[collection_name]
+        return collection.find_one(query)
+
+
 # # Usage
 # if __name__ == "__main__":
 #     db_password = "0o31l4nD7w5Iz3iy"
