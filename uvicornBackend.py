@@ -69,7 +69,7 @@ def update_user(username: str, update_data: dict, token: str = Depends(oauth2_sc
     return {"message": f"{result} user updated!"}, 200
 
 
-@app.post("/token")
+@app.post("/token") # login endpoint
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     """
     Endpoint to login a user and return an access token.
