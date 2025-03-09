@@ -30,7 +30,7 @@ class MongoManager:
             db = self.client[self.db_name]
             collection = db[collection_name]
             collection.insert_many(data)
-            print("Data inserted successfully!")
+            return "200"
         except Exception as e:
             print(e)
 

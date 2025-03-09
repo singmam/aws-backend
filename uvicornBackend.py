@@ -1,7 +1,7 @@
 from mongoManager import MongoManager
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from models import User
+from models import User, UserSignup
 from auth import verify_password, get_password_hash, create_access_token, decode_access_token, pwd_context
 
 app = FastAPI()
@@ -26,7 +26,7 @@ def read_root():
 
 
 @app.post("/create_user")
-def create_user(user: User):
+def create_user(user: UserSignup):
     """
     Endpoint to create a new user in the MongoDB collection.
     Accepts a User model as input and inserts it into the database.
@@ -34,8 +34,11 @@ def create_user(user: User):
     """
     user.password = get_password_hash(user.password)
     data = user.model_dump()
-    mongo_manager.write_to_db(collection_name, [data])
-    return data, 201
+    ret = mongo_manager.write_to_db(collection_name, [data])
+    if ret == "200":
+        return {"message": "User created"}, 200
+    else:
+        raise HTTPException(status_code=500, detail="Failed to create user")
 
 
 @app.post("/delete_user")
